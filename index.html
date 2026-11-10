@@ -2,278 +2,722 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blaugrana | Portfolio</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            line-height: 1.6;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
 
-        header {
-            background: #111827;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+:root {
+    --blue: #004D98;
+    --red: #A50044;
+    --gold: #EDBB00;
+    --bg: #080b18;
+    --card: #11182a;
+    --text: #ffffff;
+    --muted: #aab3c5;
+}
 
-        header h2 {
-            color: #38bdf8;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 15px;
-        }
+/* BACKGROUND */
 
-        nav a:hover {
-            color: #38bdf8;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+        linear-gradient(rgba(0,77,152,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(165,0,68,.06) 1px, transparent 1px);
+    background-size: 45px 45px;
+}
 
-        section {
-            padding: 80px 8%;
-            scroll-margin-top: 70px;
-        }
+.glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: .2;
+    z-index: -1;
+    pointer-events: none;
+}
 
-        .home {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-        }
+.glow.blue {
+    background: var(--blue);
+    top: 10%;
+    left: -150px;
+}
 
-        .home h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
+.glow.red {
+    background: var(--red);
+    right: -150px;
+    top: 55%;
+}
 
-        .home h1 span {
-            color: #38bdf8;
-        }
+/* HEADER */
 
-        .home p {
-            color: #cbd5e1;
-            font-size: 18px;
-            margin-bottom: 25px;
-        }
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8,11,24,.9);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(237,187,0,.2);
+    z-index: 1000;
+}
 
-        .btn {
-            display: inline-block;
-            background: #38bdf8;
-            color: #0f172a;
-            padding: 12px 25px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
 
-        .btn:hover {
-            background: #7dd3fc;
-        }
+.logo span {
+    color: var(--gold);
+}
 
-        h2.section-title {
-            text-align: center;
-            font-size: 32px;
-            color: #38bdf8;
-            margin-bottom: 35px;
-        }
+nav {
+    display: flex;
+    gap: 28px;
+}
 
-        .about {
-            background: #1e293b;
-            text-align: center;
-        }
+nav a {
+    text-decoration: none;
+    color: #d1d5db;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: .3s;
+}
 
-        .about p {
-            max-width: 700px;
-            margin: auto;
-            color: #cbd5e1;
-        }
+nav a:hover {
+    color: var(--gold);
+}
 
-        .skills-container,
-        .projects-container {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 25px;
+    cursor: pointer;
+}
 
-        .skill, .project {
-            background: #1e293b;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid #334155;
-            transition: transform 0.3s;
-        }
+/* GENERAL */
 
-        .skill:hover, .project:hover {
-            transform: translateY(-5px);
-            border-color: #38bdf8;
-        }
+section {
+    padding: 110px 10%;
+    scroll-margin-top: 75px;
+}
 
-        .skill h3, .project h3 {
-            color: #38bdf8;
-            margin-bottom: 10px;
-        }
+.section-title {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    margin-bottom: 50px;
+}
 
-        .project p {
-            color: #cbd5e1;
-            margin-bottom: 15px;
-        }
+.section-title span {
+    color: var(--gold);
+}
 
-        .contact {
-            background: #1e293b;
-            text-align: center;
-        }
+/* HERO */
 
-        .contact p {
-            margin-bottom: 12px;
-            color: #cbd5e1;
-        }
+.home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
 
-        .contact a {
-            color: #38bdf8;
-            text-decoration: none;
-        }
+.home::before {
+    content: "BARÇA";
+    position: absolute;
+    right: -30px;
+    top: 25%;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(100px, 20vw, 260px);
+    font-weight: 800;
+    color: rgba(255,255,255,.025);
+    pointer-events: none;
+}
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #111827;
-            color: #94a3b8;
-        }
+.club-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    padding: 10px 18px;
+    border: 1px solid rgba(237,187,0,.5);
+    color: var(--gold);
+    border-radius: 30px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
 
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                gap: 12px;
-            }
+.club-label span {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--gold);
+}
 
-            nav a {
-                margin: 0 7px;
-                font-size: 13px;
-            }
+.home h1 {
+    font-size: clamp(45px, 7vw, 88px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 22px;
+    position: relative;
+}
 
-            .home h1 {
-                font-size: 36px;
-            }
+.gradient-text {
+    background: linear-gradient(
+        90deg,
+        #1769bd,
+        #ffffff,
+        #d20a55,
+        #edbb00
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
 
-            section {
-                padding: 60px 6%;
-            }
-        }
-    </style>
+.home p {
+    max-width: 600px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 32px;
+}
+
+.buttons {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.primary {
+    background: linear-gradient(110deg, var(--blue), var(--red));
+    color: white;
+    box-shadow: 0 5px 25px rgba(165,0,68,.25);
+}
+
+.primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 30px rgba(165,0,68,.5);
+}
+
+.secondary {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.secondary:hover {
+    background: var(--gold);
+    color: #080b18;
+    transform: translateY(-5px);
+}
+
+.scroll-text {
+    position: absolute;
+    bottom: 35px;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+/* BARCA STRIPE */
+
+.stripe {
+    height: 7px;
+    background: repeating-linear-gradient(
+        90deg,
+        #004D98 0px,
+        #004D98 70px,
+        #A50044 70px,
+        #A50044 140px
+    );
+}
+
+/* ABOUT */
+
+.about {
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        rgba(0,77,152,.16),
+        rgba(165,0,68,.16)
+    );
+    border-top: 1px solid rgba(237,187,0,.15);
+    border-bottom: 1px solid rgba(237,187,0,.15);
+}
+
+.about p {
+    max-width: 750px;
+    margin: auto;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 2;
+}
+
+/* SKILLS */
+
+.skills-container,
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.skill, .project {
+    position: relative;
+    padding: 30px;
+    background: linear-gradient(
+        145deg,
+        rgba(0,77,152,.16),
+        rgba(165,0,68,.10)
+    );
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+    transition: .4s;
+    overflow: hidden;
+}
+
+.skill::after, .project::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--red), var(--gold));
+}
+
+.skill:hover, .project:hover {
+    transform: translateY(-9px);
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(0,77,152,.2);
+}
+
+.skill-icon {
+    font-size: 32px;
+    margin-bottom: 18px;
+}
+
+.skill h3, .project h3 {
+    color: var(--gold);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.skill p, .project p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* PROJECTS */
+
+.project-tag {
+    display: inline-block;
+    padding: 6px 11px;
+    border: 1px solid rgba(237,187,0,.4);
+    border-radius: 20px;
+    color: var(--gold);
+    font-size: 10px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.project a {
+    display: inline-block;
+    color: #60a5fa;
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.project a:hover {
+    color: var(--gold);
+}
+
+/* FOOTBALL QUOTE */
+
+.motto {
+    text-align: center;
+    padding: 65px 10%;
+    background: linear-gradient(100deg, #004D98, #A50044);
+}
+
+.motto h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(22px, 4vw, 38px);
+    color: white;
+    letter-spacing: 3px;
+}
+
+.motto p {
+    margin-top: 15px;
+    color: #fce7b2;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+/* CONTACT */
+
+.contact {
+    text-align: center;
+    background: rgba(17,24,42,.7);
+    border-top: 1px solid rgba(237,187,0,.2);
+}
+
+.contact p {
+    color: var(--muted);
+    margin: 17px 0;
+}
+
+.contact a:not(.btn) {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 28px;
+    background: #050711;
+    border-top: 1px solid rgba(237,187,0,.2);
+    color: #8290a5;
+    font-size: 11px;
+    line-height: 2;
+}
+
+/* ANIMATION */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: .8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 768px) {
+    header {
+        padding: 18px 6%;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 25px;
+        background: #080b18;
+        flex-direction: column;
+        text-align: center;
+        border-bottom: 1px solid var(--gold);
+    }
+
+    nav.show {
+        display: flex;
+    }
+
+    section {
+        padding: 85px 7%;
+    }
+
+    .home h1 {
+        font-size: 43px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h2>MyPortfolio</h2>
+<div class="glow blue"></div>
+<div class="glow red"></div>
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+<!-- NAVBAR -->
 
-    <section class="home" id="home">
-        <h1>Hello, I'm <span>Your Name</span></h1>
-        <p>Aspiring Web Developer | Creative Designer</p>
-        <a href="#projects" class="btn">View My Work</a>
-    </section>
+<header>
+    <div class="logo">BLAUGRANA<span>.</span></div>
 
-    <section class="about" id="about">
-        <h2 class="section-title">About Me</h2>
-        <p>
-            Hello! I'm Your Name. I am passionate about technology,
-            web development, and creating beautiful websites.
-            I enjoy learning new skills and building creative
-            projects that solve real-world problems.
-        </p>
-    </section>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-    <section id="skills">
-        <h2 class="section-title">My Skills</h2>
+    <nav id="navbar">
+        <a href="#home" onclick="closeMenu()">HOME</a>
+        <a href="#about" onclick="closeMenu()">ABOUT</a>
+        <a href="#skills" onclick="closeMenu()">SKILLS</a>
+        <a href="#projects" onclick="closeMenu()">PROJECTS</a>
+        <a href="#contact" onclick="closeMenu()">CONTACT</a>
+    </nav>
+</header>
 
-        <div class="skills-container">
-            <div class="skill">
-                <h3>HTML</h3>
-                <p>Creating website structures</p>
-            </div>
+<!-- HERO -->
 
-            <div class="skill">
-                <h3>CSS</h3>
-                <p>Designing beautiful layouts</p>
-            </div>
+<section class="home" id="home">
 
-            <div class="skill">
-                <h3>JavaScript</h3>
-                <p>Adding interactive features</p>
-            </div>
+    <div class="club-label">
+        <span></span>
+        MORE THAN A PORTFOLIO
+    </div>
 
-            <div class="skill">
-                <h3>Responsive Design</h3>
-                <p>Websites for mobile and desktop</p>
-            </div>
+    <h1>
+        THINK BIG.<br>
+        <span class="gradient-text">BUILD LEGACY.</span>
+    </h1>
+
+    <p>
+        Hello, I'm <strong>Your Name</strong> — a developer,
+        creative thinker and technology enthusiast.
+        Driven by creativity, inspired by football,
+        and passionate about building extraordinary digital experiences.
+    </p>
+
+    <div class="buttons">
+        <a href="#projects" class="btn primary">EXPLORE MY WORK ↗</a>
+        <a href="#contact" class="btn secondary">LET'S CONNECT</a>
+    </div>
+
+    <div class="scroll-text">VISCA EL BARÇA ✦ SCROLL DOWN</div>
+
+</section>
+
+<div class="stripe"></div>
+
+<!-- ABOUT -->
+
+<section class="about reveal" id="about">
+
+    <h2 class="section-title">ABOUT <span>ME</span></h2>
+
+    <p>
+        I'm a passionate technology enthusiast interested in
+        web development, programming and creative design.
+        I enjoy exploring new technologies and building innovative
+        solutions. Just like football, I believe in teamwork,
+        consistency, creativity and never giving up.
+    </p>
+
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+    <h2 class="section-title reveal">MY <span>PLAYING XI</span></h2>
+
+    <div class="skills-container">
+
+        <div class="skill reveal">
+            <div class="skill-icon">🌐</div>
+            <h3>HTML5</h3>
+            <p>Building modern and structured web experiences.</p>
         </div>
-    </section>
 
-    <section id="projects">
-        <h2 class="section-title">My Projects</h2>
-
-        <div class="projects-container">
-            <div class="project">
-                <h3>Portfolio Website</h3>
-                <p>A personal website to showcase my skills.</p>
-                <a href="#contact" class="btn">Learn More</a>
-            </div>
-
-            <div class="project">
-                <h3>Landing Page</h3>
-                <p>A clean and modern website landing page.</p>
-                <a href="#contact" class="btn">Learn More</a>
-            </div>
-
-            <div class="project">
-                <h3>Calculator</h3>
-                <p>A simple calculator built for practice.</p>
-                <a href="#contact" class="btn">Learn More</a>
-            </div>
+        <div class="skill reveal">
+            <div class="skill-icon">🎨</div>
+            <h3>CSS3</h3>
+            <p>Creating creative and responsive layouts.</p>
         </div>
-    </section>
 
-    <section class="contact" id="contact">
-        <h2 class="section-title">Contact Me</h2>
-        <p>Email: <a href="mailto:yourname@example.com">
-            yourname@example.com</a></p>
-        <p>Phone: +91 XXXXX XXXXX</p>
-        <p>Location: Your City, India</p>
-    </section>
+        <div class="skill reveal">
+            <div class="skill-icon">⚡</div>
+            <h3>JavaScript</h3>
+            <p>Developing dynamic and interactive applications.</p>
+        </div>
 
-    <footer>
-        <p>&copy; 2026 Your Name. All rights reserved.</p>
-    </footer>
+        <div class="skill reveal">
+            <div class="skill-icon">🐍</div>
+            <h3>Python</h3>
+            <p>Programming logic and powerful applications.</p>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">🚀</div>
+            <h3>Django</h3>
+            <p>Developing secure and scalable web applications.</p>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">📱</div>
+            <h3>Responsive UI</h3>
+            <p>Creating experiences for every screen size.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+    <h2 class="section-title reveal">MY <span>HIGHLIGHTS</span></h2>
+
+    <div class="projects-container">
+
+        <div class="project reveal">
+            <span class="project-tag">WEB DEVELOPMENT</span>
+            <h3>Portfolio Website</h3>
+            <p>A modern personal portfolio showcasing
+            creativity, skills and professional achievements.</p>
+            <a href="#contact">VIEW PROJECT ↗</a>
+        </div>
+
+        <div class="project reveal">
+            <span class="project-tag">PYTHON / DJANGO</span>
+            <h3>Finance Management</h3>
+            <p>A finance platform for tracking income,
+            expenses and managing financial activities.</p>
+            <a href="#contact">VIEW PROJECT ↗</a>
+        </div>
+
+        <div class="project reveal">
+            <span class="project-tag">MACHINE LEARNING</span>
+            <h3>Helmet Detection</h3>
+            <p>An intelligent computer vision project
+            designed to identify helmet usage for road safety.</p>
+            <a href="#contact">VIEW PROJECT ↗</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- BARCA MOTTO -->
+
+<div class="motto">
+    <h2>MÉS QUE UN CLUB</h2>
+    <p>PASSION. PRIDE. PERSEVERANCE.</p>
+</div>
+
+<!-- CONTACT -->
+
+<section class="contact reveal" id="contact">
+
+    <h2 class="section-title">LET'S <span>CONNECT</span></h2>
+
+    <p>Ready to create something extraordinary?</p>
+
+    <p>Email:
+        <a href="mailto:yourname@example.com">
+            yourname@example.com
+        </a>
+    </p>
+
+    <p>Phone: +91 XXXXX XXXXX</p>
+
+    <p>Location: Kerala, India</p>
+
+    <br>
+
+    <a href="mailto:yourname@example.com" class="btn primary">
+        SEND A MESSAGE ↗
+    </a>
+
+</section>
+
+<footer>
+    <p>© <span id="year"></span> BLAUGRANA. ALL RIGHTS RESERVED.</p>
+    <p>BUILT WITH PASSION | INSPIRED BY FC BARCELONA 🔵🔴</p>
+</footer>
+
+<script>
+
+// MOBILE MENU
+
+function toggleMenu() {
+    document.getElementById("navbar").classList.toggle("show");
+}
+
+function closeMenu() {
+    document.getElementById("navbar").classList.remove("show");
+}
+
+// AUTOMATIC YEAR
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+// SCROLL ANIMATION
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
+
+</script>
 
 </body>
 </html>
