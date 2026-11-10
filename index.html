@@ -1,586 +1,937 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio | FC Barcelona</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        :root {
-            --blue: #004D98;
-            --red: #A50044;
-            --gold: #EDBB00;
-            --dark: #080b18;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: var(--dark);
-            color: var(--white);
-            overflow-x: hidden;
-        }
-
-        /* NAVBAR */
-
-        nav {
-            width: 100%;
-            padding: 20px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-            background: rgba(8, 11, 24, 0.9);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: bold;
-            color: var(--gold);
-        }
-
-        .logo span {
-            color: var(--red);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        .menu-btn {
-            display: none;
-            font-size: 28px;
-            color: white;
-            cursor: pointer;
-        }
-
-        /* HERO SECTION */
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 10% 80px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    rgba(8, 11, 24, 0.95),
-                    rgba(8, 11, 24, 0.55),
-                    rgba(8, 11, 24, 0.3)
-                ),
-                url("images/messi.jpg") center/cover no-repeat;
-        }
-
-        .hero-content {
-            max-width: 650px;
-        }
-
-        .hero-content h3 {
-            color: var(--gold);
-            font-size: 20px;
-            margin-bottom: 15px;
-            letter-spacing: 3px;
-        }
-
-        .hero-content h1 {
-            font-size: 65px;
-            margin-bottom: 15px;
-            line-height: 1.1;
-        }
-
-        .hero-content h1 span {
-            color: var(--gold);
-        }
-
-        .hero-content h2 {
-            font-size: 27px;
-            color: #ddd;
-            margin-bottom: 20px;
-        }
-
-        .hero-content p {
-            font-size: 16px;
-            color: #ccc;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 13px 30px;
-            background: var(--red);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: var(--blue);
-            transform: translateY(-3px);
-        }
-
-        /* COMMON SECTION */
-
-        section {
-            padding: 90px 10%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 38px;
-            margin-bottom: 50px;
-        }
-
-        .section-title span {
-            color: var(--gold);
-        }
-
-        /* ABOUT */
-
-        .about {
-            background: #10172a;
-            text-align: center;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: auto;
-        }
-
-        .about-content p {
-            color: #ccc;
-            line-height: 1.9;
-            font-size: 16px;
-        }
-
-        /* SKILLS */
-
-        .skills {
-            background: var(--dark);
-        }
-
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-        }
-
-        .skill-card {
-            padding: 30px;
-            text-align: center;
-            background: #151e32;
-            border: 1px solid rgba(237,187,0,0.25);
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--gold);
-        }
-
-        .skill-card h3 {
-            color: var(--gold);
-            margin-bottom: 12px;
-        }
-
-        .skill-card p {
-            color: #ccc;
-        }
-
-        /* PROJECTS */
-
-        .projects {
-            background: #10172a;
-        }
-
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-
-        .project-card {
-            padding: 30px;
-            background: #151e32;
-            border-radius: 10px;
-            border-bottom: 4px solid var(--red);
-            transition: 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            border-bottom-color: var(--gold);
-        }
-
-        .project-card h3 {
-            color: var(--gold);
-            margin-bottom: 15px;
-        }
-
-        .project-card p {
-            color: #ccc;
-            line-height: 1.7;
-        }
-
-        /* BARCA QUOTE */
-
-        .barca {
-            text-align: center;
-            background: linear-gradient(120deg, var(--blue), var(--red));
-            padding: 65px 10%;
-        }
-
-        .barca h2 {
-            font-size: 35px;
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .barca p {
-            font-size: 18px;
-            color: #eee;
-            letter-spacing: 2px;
-        }
-
-        /* CONTACT */
-
-        .contact {
-            text-align: center;
-            background: var(--dark);
-        }
-
-        .contact p {
-            color: #ccc;
-            margin: 15px 0;
-        }
-
-        .contact a {
-            color: var(--gold);
-            text-decoration: none;
-        }
-
-        /* FOOTER */
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #050711;
-            color: #aaa;
-            border-top: 2px solid var(--red);
-        }
-
-        footer span {
-            color: var(--gold);
-        }
-
-        /* SCROLL ANIMATION */
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* RESPONSIVE */
-
-        @media (max-width: 768px) {
-
-            nav {
-                padding: 18px 6%;
-            }
-
-            .menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                flex-direction: column;
-                gap: 0;
-                background: #10172a;
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                padding: 15px;
-            }
-
-            .hero {
-                padding: 120px 7% 70px;
-                background-position: center;
-            }
-
-            .hero-content h1 {
-                font-size: 43px;
-            }
-
-            .hero-content h2 {
-                font-size: 21px;
-            }
-
-            section {
-                padding: 70px 7%;
-            }
-
-            .section-title {
-                font-size: 30px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blaugrana | My Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= GLOBAL ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --blue: #004D98;
+    --red: #A50044;
+    --gold: #EDBB00;
+    --bg: #080b18;
+    --card: #11182a;
+    --white: #ffffff;
+    --muted: #aab3c5;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+/* BACKGROUND GRID */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    background:
+        linear-gradient(rgba(0,77,152,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(165,0,68,.05) 1px, transparent 1px);
+
+    background-size: 45px 45px;
+    pointer-events: none;
+}
+
+/* GLOW EFFECTS */
+
+.glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: .18;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.glow.blue {
+    background: var(--blue);
+    top: 10%;
+    left: -150px;
+}
+
+.glow.red {
+    background: var(--red);
+    right: -150px;
+    top: 55%;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 8%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(8,11,24,.9);
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(237,187,0,.2);
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #d1d5db;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+    padding: 110px 10%;
+    scroll-margin-top: 75px;
+}
+
+.section-title {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    margin-bottom: 50px;
+}
+
+.section-title span {
+    color: var(--gold);
+}
+
+/* ================= HERO ================= */
+
+.home {
+    min-height: 100vh;
+    padding-top: 130px;
+    padding-bottom: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5,8,24,.98) 5%,
+            rgba(5,8,24,.88) 40%,
+            rgba(5,8,24,.45) 75%,
+            rgba(5,8,24,.55) 100%
+        ),
+        linear-gradient(
+            0deg,
+            #080b18 0%,
+            transparent 40%
+        ),
+        url("images/messi.jpg");
+
+    background-size: cover;
+    background-position: center 25%;
+}
+
+/* BARCA LOGO WATERMARK */
+
+.home::after {
+    content: "";
+
+    position: absolute;
+    width: 380px;
+    height: 380px;
+
+    right: 8%;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background-image: url("images/barca-logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    opacity: .18;
+
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* HERO CONTENT */
+
+.home > * {
+    position: relative;
+    z-index: 1;
+}
+
+.club-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    width: fit-content;
+    padding: 10px 18px;
+
+    border: 1px solid rgba(237,187,0,.5);
+    color: var(--gold);
+
+    border-radius: 30px;
+    font-size: 11px;
+    letter-spacing: 2px;
+
+    margin-bottom: 30px;
+}
+
+.club-label span {
+    width: 8px;
+    height: 8px;
+
+    background: var(--gold);
+    border-radius: 50%;
+
+    box-shadow: 0 0 12px var(--gold);
+}
+
+.home h1 {
+    font-size: clamp(45px, 7vw, 88px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 22px;
+}
+
+.gradient-text {
+    background: linear-gradient(
+        90deg,
+        #1769bd,
+        #ffffff,
+        #d20a55,
+        #edbb00
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.home p {
+    max-width: 600px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.9;
+    margin-bottom: 32px;
+}
+
+.buttons {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 5px;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    transition: .3s;
+}
+
+.primary {
+    background: linear-gradient(
+        110deg,
+        var(--blue),
+        var(--red)
+    );
+
+    color: white;
+    box-shadow: 0 5px 25px rgba(165,0,68,.25);
+}
+
+.primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 30px rgba(165,0,68,.5);
+}
+
+.secondary {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.secondary:hover {
+    background: var(--gold);
+    color: #080b18;
+    transform: translateY(-5px);
+}
+
+.scroll-text {
+    position: absolute;
+    bottom: 35px;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+/* ================= BARCA STRIPE ================= */
+
+.stripe {
+    height: 7px;
+
+    background: repeating-linear-gradient(
+        90deg,
+        #004D98 0px,
+        #004D98 70px,
+        #A50044 70px,
+        #A50044 140px
+    );
+}
+
+/* ================= ABOUT ================= */
+
+.about {
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        rgba(0,77,152,.16),
+        rgba(165,0,68,.16)
+    );
+
+    border-top: 1px solid rgba(237,187,0,.15);
+    border-bottom: 1px solid rgba(237,187,0,.15);
+}
+
+.about p {
+    max-width: 750px;
+    margin: auto;
+
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 2;
+}
+
+/* ================= SKILLS ================= */
+
+.skills-container,
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.skill,
+.project {
+    position: relative;
+
+    padding: 30px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(0,77,152,.16),
+        rgba(165,0,68,.10)
+    );
+
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px;
+
+    transition: .4s;
+    overflow: hidden;
+}
+
+.skill::after,
+.project::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--red),
+        var(--gold)
+    );
+}
+
+.skill:hover,
+.project:hover {
+    transform: translateY(-9px);
+    border-color: var(--gold);
+
+    box-shadow: 0 10px 30px rgba(0,77,152,.2);
+}
+
+.skill-icon {
+    font-size: 32px;
+    margin-bottom: 18px;
+}
+
+.skill h3,
+.project h3 {
+    color: var(--gold);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.skill p,
+.project p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* ================= PROJECTS ================= */
+
+.project-tag {
+    display: inline-block;
+
+    padding: 6px 11px;
+
+    border: 1px solid rgba(237,187,0,.4);
+    border-radius: 20px;
+
+    color: var(--gold);
+    font-size: 10px;
+
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.project a {
+    display: inline-block;
+
+    color: #60a5fa;
+    text-decoration: none;
+
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.project a:hover {
+    color: var(--gold);
+}
+
+/* ================= BARCA MOTTO ================= */
+
+.motto {
+    text-align: center;
+    padding: 65px 10%;
+
+    background: linear-gradient(
+        100deg,
+        #004D98,
+        #A50044
+    );
+}
+
+.motto h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(22px, 4vw, 38px);
+    color: white;
+    letter-spacing: 3px;
+}
+
+.motto p {
+    margin-top: 15px;
+    color: #fce7b2;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+    text-align: center;
+
+    background: rgba(17,24,42,.7);
+    border-top: 1px solid rgba(237,187,0,.2);
+}
+
+.contact p {
+    color: var(--muted);
+    margin: 17px 0;
+}
+
+.contact a:not(.btn) {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+    padding: 28px;
+
+    background: #050711;
+    border-top: 1px solid rgba(237,187,0,.2);
+
+    color: #8290a5;
+    font-size: 11px;
+    line-height: 2;
+}
+
+/* ================= SCROLL ANIMATION ================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: .8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 768px) {
+
+    header {
+        padding: 18px 6%;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    nav {
+        display: none;
+
+        position: absolute;
+        top: 70px;
+        left: 0;
+
+        width: 100%;
+        padding: 25px;
+
+        background: #080b18;
+
+        flex-direction: column;
+        text-align: center;
+
+        border-bottom: 1px solid var(--gold);
+    }
+
+    nav.show {
+        display: flex;
+    }
+
+    section {
+        padding: 85px 7%;
+    }
+
+    .home {
+        background-position: 65% center;
+        min-height: 90vh;
+    }
+
+    .home h1 {
+        font-size: 43px;
+    }
+
+    .home::after {
+        width: 200px;
+        height: 200px;
+        right: 3%;
+        top: 25%;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .scroll-text {
+        bottom: 15px;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
+<!-- BACKGROUND GLOW -->
 
-    <nav>
-        <div class="logo">MY<span>PORTFOLIO</span></div>
+<div class="glow blue"></div>
+<div class="glow red"></div>
 
-        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+<!-- NAVIGATION -->
 
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home" onclick="closeMenu()">Home</a></li>
-            <li><a href="#about" onclick="closeMenu()">About</a></li>
-            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
-            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
-            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-        </ul>
+<header>
+
+    <div class="logo">
+        BLAUGRANA<span>.</span>
+    </div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav id="navbar">
+        <a href="#home" onclick="closeMenu()">HOME</a>
+        <a href="#about" onclick="closeMenu()">ABOUT</a>
+        <a href="#skills" onclick="closeMenu()">SKILLS</a>
+        <a href="#projects" onclick="closeMenu()">PROJECTS</a>
+        <a href="#contact" onclick="closeMenu()">CONTACT</a>
     </nav>
 
+</header>
 
-    <!-- HERO -->
+<!-- HERO SECTION -->
 
-    <section class="hero" id="home">
-        <div class="hero-content reveal">
+<section class="home" id="home">
 
-            <h3>WELCOME TO MY WORLD</h3>
+    <div class="club-label">
+        <span></span>
+        MORE THAN A PORTFOLIO
+    </div>
 
-            <h1>Hi, I'm <span>Your Name</span></h1>
+    <h1>
+        THINK BIG.<br>
+        <span class="gradient-text">BUILD LEGACY.</span>
+    </h1>
 
-            <h2>Web Developer & Programmer</h2>
+    <p>
+        Hello, I'm <strong>Your Name</strong> — a developer,
+        creative thinker and technology enthusiast.
+
+        Driven by creativity, inspired by football,
+        and passionate about building extraordinary
+        digital experiences.
+    </p>
+
+    <div class="buttons">
+
+        <a href="#projects" class="btn primary">
+            EXPLORE MY WORK ↗
+        </a>
+
+        <a href="#contact" class="btn secondary">
+            LET'S CONNECT
+        </a>
+
+    </div>
+
+    <div class="scroll-text">
+        VISCA EL BARÇA ✦ SCROLL DOWN
+    </div>
+
+</section>
+
+<div class="stripe"></div>
+
+<!-- ABOUT -->
+
+<section class="about reveal" id="about">
+
+    <h2 class="section-title">
+        ABOUT <span>ME</span>
+    </h2>
+
+    <p>
+        I'm a passionate technology enthusiast interested in
+        web development, programming and creative design.
+
+        I enjoy exploring new technologies and building innovative
+        solutions. Just like football, I believe in teamwork,
+        consistency, creativity and never giving up.
+    </p>
+
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+    <h2 class="section-title reveal">
+        MY <span>PLAYING XI</span>
+    </h2>
+
+    <div class="skills-container">
+
+        <div class="skill reveal">
+            <div class="skill-icon">🌐</div>
+            <h3>HTML5</h3>
+            <p>Building modern and structured web experiences.</p>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">🎨</div>
+            <h3>CSS3</h3>
+            <p>Creating creative and responsive layouts.</p>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">⚡</div>
+            <h3>JavaScript</h3>
+            <p>Developing dynamic and interactive applications.</p>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">🐍</div>
+            <h3>Python</h3>
+            <p>Programming logic and powerful applications.</p>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">🚀</div>
+            <h3>Django</h3>
+            <p>Developing secure and scalable web applications.</p>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">📱</div>
+            <h3>Responsive UI</h3>
+            <p>Creating experiences for every screen size.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+    <h2 class="section-title reveal">
+        MY <span>HIGHLIGHTS</span>
+    </h2>
+
+    <div class="projects-container">
+
+        <div class="project reveal">
+
+            <span class="project-tag">
+                WEB DEVELOPMENT
+            </span>
+
+            <h3>Portfolio Website</h3>
 
             <p>
-                I am passionate about technology, programming and
-                creating modern digital experiences. I enjoy learning
-                new technologies and building creative projects.
+                A modern personal portfolio showcasing creativity,
+                skills and professional achievements.
             </p>
 
-            <a href="#projects" class="btn">Explore My Work</a>
+            <a href="#contact">VIEW PROJECT ↗</a>
 
         </div>
-    </section>
 
+        <div class="project reveal">
 
-    <!-- ABOUT -->
+            <span class="project-tag">
+                PYTHON / DJANGO
+            </span>
 
-    <section class="about reveal" id="about">
+            <h3>Finance Management</h3>
 
-        <h2 class="section-title">About <span>Me</span></h2>
-
-        <div class="about-content">
             <p>
-                Hello! I am a passionate developer interested in
-                web development and software engineering.
-                I enjoy solving problems, learning new skills
-                and developing useful applications.
-
-                My goal is to become a skilled developer and
-                create innovative projects that make a difference.
+                A finance platform for tracking income,
+                expenses and managing financial activities.
             </p>
-        </div>
 
-    </section>
-
-
-    <!-- SKILLS -->
-
-    <section class="skills reveal" id="skills">
-
-        <h2 class="section-title">My <span>Skills</span></h2>
-
-        <div class="skills-container">
-
-            <div class="skill-card">
-                <h3>HTML</h3>
-                <p>Creating structured web pages.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>CSS</h3>
-                <p>Designing modern and responsive interfaces.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>JavaScript</h3>
-                <p>Adding interactive website features.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Python</h3>
-                <p>Building applications and solving problems.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>Django</h3>
-                <p>Developing dynamic web applications.</p>
-            </div>
-
-            <div class="skill-card">
-                <h3>MySQL</h3>
-                <p>Managing and working with databases.</p>
-            </div>
+            <a href="#contact">VIEW PROJECT ↗</a>
 
         </div>
 
-    </section>
+        <div class="project reveal">
 
+            <span class="project-tag">
+                MACHINE LEARNING
+            </span>
 
-    <!-- PROJECTS -->
+            <h3>Helmet Detection</h3>
 
-    <section class="projects reveal" id="projects">
+            <p>
+                An intelligent computer vision project
+                designed to identify helmet usage for road safety.
+            </p>
 
-        <h2 class="section-title">My <span>Projects</span></h2>
-
-        <div class="projects-container">
-
-            <div class="project-card">
-                <h3>Portfolio Website</h3>
-                <p>
-                    A personal portfolio website built using
-                    HTML, CSS and JavaScript.
-                </p>
-            </div>
-
-            <div class="project-card">
-                <h3>Finance Management System</h3>
-                <p>
-                    A Django-based application for tracking
-                    income, expenses and financial activities.
-                </p>
-            </div>
-
-            <div class="project-card">
-                <h3>Helmet Detection System</h3>
-                <p>
-                    An image classification project designed
-                    to identify helmet usage among riders.
-                </p>
-            </div>
+            <a href="#contact">VIEW PROJECT ↗</a>
 
         </div>
 
-    </section>
+    </div>
 
+</section>
 
-    <!-- BARCELONA SECTION -->
+<!-- BARCA MOTTO -->
 
-    <section class="barca reveal">
-        <h2>MÉS QUE UN CLUB</h2>
-        <p>MORE THAN A CLUB</p>
-    </section>
+<div class="motto">
 
+    <h2>MÉS QUE UN CLUB</h2>
 
-    <!-- CONTACT -->
+    <p>
+        PASSION. PRIDE. PERSEVERANCE.
+    </p>
 
-    <section class="contact reveal" id="contact">
+</div>
 
-        <h2 class="section-title">Contact <span>Me</span></h2>
+<!-- CONTACT -->
 
-        <p>Email: <a href="mailto:yourmail@example.com">
-            yourmail@example.com
-        </a></p>
+<section class="contact reveal" id="contact">
 
-        <p>Phone: +91 XXXXXXXXXX</p>
+    <h2 class="section-title">
+        LET'S <span>CONNECT</span>
+    </h2>
 
-        <p>Location: Kerala, India</p>
+    <p>
+        Ready to create something extraordinary?
+    </p>
 
-    </section>
+    <p>
+        Email:
+        <a href="mailto:yourname@example.com">
+            yourname@example.com
+        </a>
+    </p>
 
+    <p>Phone: +91 XXXXX XXXXX</p>
 
-    <!-- FOOTER -->
+    <p>Location: Kerala, India</p>
 
-    <footer>
-        <p>
-            © 2026 <span>Your Name</span>.
-            All Rights Reserved.
-        </p>
-        <p>Made with passion 💙❤️</p>
-    </footer>
+    <br>
 
+    <a href="mailto:yourname@example.com" class="btn primary">
+        SEND A MESSAGE ↗
+    </a>
 
-    <!-- JAVASCRIPT -->
+</section>
 
-    <script>
+<!-- FOOTER -->
 
-        function toggleMenu() {
-            document.getElementById("navLinks").classList.toggle("active");
+<footer>
+
+    <p>
+        © <span id="year"></span> BLAUGRANA.
+        ALL RIGHTS RESERVED.
+    </p>
+
+    <p>
+        BUILT WITH PASSION | INSPIRED BY FC BARCELONA 🔵🔴
+    </p>
+
+</footer>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+// MOBILE MENU
+
+function toggleMenu() {
+    document.getElementById("navbar").classList.toggle("show");
+}
+
+function closeMenu() {
+    document.getElementById("navbar").classList.remove("show");
+}
+
+// AUTOMATIC YEAR
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+// SCROLL ANIMATION
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.classList.add("active");
+
+            observer.unobserve(entry.target);
+
         }
 
-        function closeMenu() {
-            document.getElementById("navLinks").classList.remove("active");
-        }
+    });
 
-        // Scroll reveal animation
+}, {
+    threshold: 0.12
+});
 
-        const revealElements = document.querySelectorAll(".reveal");
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
 
-        function revealOnScroll() {
-            revealElements.forEach(element => {
-                const windowHeight = window.innerHeight;
-                const elementTop = element.getBoundingClientRect().top;
-
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add("active");
-                }
-            });
-        }
-
-        window.addEventListener("scroll", revealOnScroll);
-        revealOnScroll();
-
-    </script>
+</script>
 
 </body>
 </html>
